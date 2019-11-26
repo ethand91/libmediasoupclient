@@ -11,22 +11,22 @@
 
 using json = nlohmann::json;
 
-static bool isRtxCodec(const json& codec)
-{
-	MSC_TRACE();
-
-	static const std::regex regex(".+/rtx$", std::regex_constants::ECMAScript);
-
-	std::smatch match;
-	auto name = codec["mimeType"].get<std::string>();
-
-	return std::regex_match(name, match, regex);
-}
-
 namespace mediasoupclient
 {
 namespace ortc
 {
+  static bool isRtxCodec(const json& codec)
+  {
+    MSC_TRACE();
+
+    static const std::regex regex(".+/rtx$", std::regex_constants::ECMAScript);
+
+    std::smatch match;
+    auto name = codec["mimeType"].get<std::string>();
+
+    return std::regex_match(name, match, regex);
+  }
+
 	static uint8_t getH264PacketizationMode(const json& codec)
 	{
 		MSC_TRACE();
