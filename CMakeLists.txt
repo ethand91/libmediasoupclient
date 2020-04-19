@@ -5,7 +5,7 @@ project(mediasoupclient LANGUAGES CXX)
 # Set version number.
 set(mediasoupclient_VERSION_MAJOR 3)
 set(mediasoupclient_VERSION_MINOR 0)
-set(mediasoupclient_VERSION_PATCH 7)
+set(mediasoupclient_VERSION_PATCH 8)
 
 # Configure a header file to pass the version.
 configure_file (
@@ -34,13 +34,13 @@ if(NOT LIBWEBRTC_BINARY_PATH)
 	message(FATAL_ERROR "LIBWEBRTC_BINARY_PATH not provided")
 endif()
 
-message ("\n=========== libmediasoupclient Build Configuration =============\n")
-message (STATUS "MEDIASOUPCLIENT_BUILD_TESTS  = " ${MEDIASOUPCLIENT_BUILD_TESTS})
-message (STATUS "MEDIASOUPCLIENT_LOG_TRACE    = " ${MEDIASOUPCLIENT_LOG_TRACE})
-message (STATUS "MEDIASOUPCLIENT_LOG_DEV      = " ${MEDIASOUPCLIENT_LOG_DEV})
-message (STATUS "LIBWEBRTC_INCLUDE_PATH       = " ${LIBWEBRTC_INCLUDE_PATH})
-message (STATUS "LIBWEBRTC_BINARY_PATH        = " ${LIBWEBRTC_BINARY_PATH})
-message ("")
+message("\n=========== libmediasoupclient Build Configuration ===========\n")
+message(STATUS "MEDIASOUPCLIENT_BUILD_TESTS : " ${MEDIASOUPCLIENT_BUILD_TESTS})
+message(STATUS "MEDIASOUPCLIENT_LOG_TRACE   : " ${MEDIASOUPCLIENT_LOG_TRACE})
+message(STATUS "MEDIASOUPCLIENT_LOG_DEV     : " ${MEDIASOUPCLIENT_LOG_DEV})
+message(STATUS "LIBWEBRTC_INCLUDE_PATH      : " ${LIBWEBRTC_INCLUDE_PATH})
+message(STATUS "LIBWEBRTC_BINARY_PATH       : " ${LIBWEBRTC_BINARY_PATH})
+message("")
 
 # GCC >= 4.9 is required due to std::regex use.
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
@@ -63,15 +63,29 @@ set(
 	src/Device.cpp
 	src/Handler.cpp
 	src/Logger.cpp
-	src/mediasoupclient.cpp
 	src/PeerConnection.cpp
 	src/Producer.cpp
 	src/Transport.cpp
+	src/mediasoupclient.cpp
 	src/ortc.cpp
 	src/scalabilityMode.cpp
 	src/sdp/MediaSection.cpp
 	src/sdp/RemoteSdp.cpp
 	src/sdp/Utils.cpp
+	include/Consumer.hpp
+	include/Device.hpp
+	include/Handler.hpp
+	include/Logger.hpp
+	include/MediaSoupClientErrors.hpp
+	include/PeerConnection.hpp
+	include/Producer.hpp
+	include/Transport.hpp
+	include/mediasoupclient.hpp
+	include/ortc.hpp
+	include/scalabilityMode.hpp
+	include/sdp/MediaSection.hpp
+	include/sdp/RemoteSdp.hpp
+	include/sdp/Utils.hpp
 )
 
 # Create target.
