@@ -1,4 +1,4 @@
-C_CLASS "ortc"
+#define MSC_CLASS "ortc"
 
 #include "ortc.hpp"
 #include "Logger.hpp"
