@@ -1,4 +1,4 @@
-#define MSC_CLASS "ortc"
+C_CLASS "ortc"
 
 #include "ortc.hpp"
 #include "Logger.hpp"
@@ -12,23 +12,21 @@
 using json = nlohmann::json;
 using namespace mediasoupclient;
 
+static constexpr uint32_t ProbatorSsrc{ 1234u };
+
+// Static functions declaration.
+static bool isRtxCodec(const json& codec);
+static bool matchCodecs(json& aCodec, const json& bCodec, bool strict = false, bool modify = false);
+static bool matchHeaderExtensions(const json& aExt, const json& bExt);
+static json reduceRtcpFeedback(const json& codecA, const json& codecB);
+static uint8_t getH264PacketizationMode(const json& codec);
+static uint8_t getH264LevelAssimetryAllowed(const json& codec);
+static std::string getH264ProfileLevelId(const json& codec);
+static std::string getVP9ProfileId(const json& codec);
+
 namespace mediasoupclient
 {
-namespace ortc
-{
-  static bool isRtxCodec(const json& codec)
-  {
-    MSC_TRACE();
-
-    static const std::regex regex(".+/rtx$", std::regex_constants::ECMAScript);
-
-    std::smatch match;
-    auto name = codec["mimeType"].get<std::string>();
-
-    return std::regex_match(name, match, regex);
-  }
-
-	static uint8_t getH264PacketizationMode(const json& codec)
+	namespace ortc
 	{
 		/**
 		 * Validates RtpCapabilities. It may modify given data by adding missing
